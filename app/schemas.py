@@ -1,7 +1,7 @@
 from pydantic import BaseModel
 
-class RecommendationRequest(BaseModel):
-    data: int
+class RecommendLocationRequest(BaseModel):
+    input: int
 
-class RecommendationResponse(BaseModel):
-    result: str
+class RecommendLocationResponse(BaseModel):
+    output: str

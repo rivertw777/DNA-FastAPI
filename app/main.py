@@ -1,5 +1,6 @@
+import uvicorn
 from fastapi import FastAPI
-from app.schemas import RecommendationRequest, RecommendationResponse
+from app.schemas import RecommendLocationRequest, RecommendLocationResponse
 from app.services import get_recommendations
 
 # 서버 실행: uvicorn app.main:app --reload
@@ -7,8 +8,9 @@ from app.services import get_recommendations
 
 app = FastAPI()
 
-@app.post("/recommend", response_model=RecommendationResponse)
-def recommend(request: RecommendationRequest):
-    result = get_recommendations(request.data)
-    return RecommendationResponse(result="Test Success!")
+@app.post("/recommend", response_model=RecommendLocationResponse)
+def recommend(request: RecommendLocationRequest):
+    return get_recommendations(request.input)
 
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=8000)
