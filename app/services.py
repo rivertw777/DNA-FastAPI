@@ -21,15 +21,13 @@ def get_recommendations(request: RecommendLocationRequest):
 
         recommend_region = predict_region(responses, model_sample, label_encoder_gungu)
 
-        return RecommendLocationResponse(output=recommend_region)
+        return RecommendLocationResponse(locationNames=recommend_region)
     except Exception as e:
         print(f"Error occurred: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
 
 """s3 파일 다운로드"""
-
-
 def download_files():
     aws_access_key = os.getenv('AWS_ACCESS_KEY_ID')
     aws_secret_key = os.getenv('AWS_SECRET_ACCESS_KEY')
@@ -68,28 +66,28 @@ def make_survey_result(request: RecommendLocationRequest):
     responses['TRAVEL_MISSION_PRIORITY'] = request.activities
 
     # 최근 다녀온 여행에서 방문한 곳의 유형
-    responses['VISIT_AREA_TYPE_CD'] = request.visit_types
+    responses['VISIT_AREA_TYPE_CD'] = request.visitTypes
 
     # 본인의 수입
-    responses['INCOME'] = request.income_ranges
+    responses['INCOME'] = request.incomeRanges
 
     # 잘 알려지지 않은 방문지와 잘 알려진 방문지 중 선호하는 유형
-    responses['TRAVEL_STYL_6'] = request.preference_types
+    responses['TRAVEL_STYL_6'] = request.preferenceTypes
 
     # 1년에 여행을 몇 번정도 하나요?
-    responses['TRAVEL_NUM'] = request.trip_count
+    responses['TRAVEL_NUM'] = request.tripCount
 
     # 편하지만 비싼 숙소와 불편하지만 저렴한 숙소 중 선호하는 유형
-    responses['TRAVEL_STYL_4'] = request.accommodation_preference
+    responses['TRAVEL_STYL_4'] = request.accommodationPreference
 
     # 워케이션을 통해서 얻고자 하는 바는?
-    responses['TRAVEL_MOTIVE_1'] = request.workation_goals
+    responses['TRAVEL_MOTIVE_1'] = request.workationGoals
 
     # 휴양과 체험 중 선호하는 유형
-    responses['TRAVEL_STYL_5'] = request.relaxation_experience
+    responses['TRAVEL_STYL_5'] = request.relaxationExperience
 
     # 사진 촬영 중요하지 않음 vs 사진촬영 중요함 중 선호하는 유형은?
-    responses['TRAVEL_STYL_8'] = request.photo_importance
+    responses['TRAVEL_STYL_8'] = request.photoImportance
 
     return responses
 
