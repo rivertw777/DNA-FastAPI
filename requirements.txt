@@ -1,2 +1,9 @@
 fastapi
 uvicorn[standard]
+pandas
+numpy==1.26.4
+joblib
+catboost
+scikit-learn
+boto3
+python-dotenv

@@ -10,7 +10,7 @@ app = FastAPI()
 
 @app.post("/recommend", response_model=RecommendLocationResponse)
 def recommend(request: RecommendLocationRequest):
-    return get_recommendations(request.input)
+    return get_recommendations(request)
 
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=8000)
