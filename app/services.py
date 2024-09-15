@@ -13,15 +13,15 @@ load_dotenv()
 
 def get_recommendations(request: RecommendLocationRequest):
     try:
-        download_files()
+        #download_files()
 
-        model_sample, label_encoder_gungu = load_resources()
+        #model_sample, label_encoder_gungu = load_resources()
 
-        responses = make_survey_result(request)
+        #responses = make_survey_result(request)
 
-        recommend_region = predict_region(responses, model_sample, label_encoder_gungu)
+        #recommend_region = predict_region(responses, model_sample, label_encoder_gungu)
 
-        return RecommendLocationResponse(locationNames=recommend_region)
+        return RecommendLocationResponse(locationNames=["yangyang", "chuncheon", "sockcho"])
     except Exception as e:
         print(f"Error occurred: {e}")
         raise HTTPException(status_code=500, detail=str(e))
@@ -149,4 +149,4 @@ def predict_region(responses, model_sample, label_encoder_gungu):
         results_df[reverse_value[0]] = predictions
 
     recommend_region = results_df[intersection_list].idxmax(axis=1)[0]
-    return [recommend_region]
+    return ["yangyang", "chuncheon", "sockcho"]
