@@ -14,6 +14,10 @@ class RecommendLocationRequest(BaseModel):
     knownVsUnknown: int
     photographyImportance: int
 
+class Location(BaseModel):
+    locationName: str
+    ranking: int
+
 class RecommendLocationResponse(BaseModel):
-    locationNames: List[str]
+    locations: List[Location]
 
