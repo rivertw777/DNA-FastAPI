@@ -9,7 +9,7 @@ import warnings
 
 warnings.filterwarnings("ignore")
 load_dotenv()
-download_folder = 'downloads'
+download_folder = os.getenv('DOWNLOAD_FOLDER', 'downloads')
 
 def get_recommendations(request: RecommendLocationRequest):
     try:
